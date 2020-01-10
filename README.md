@@ -1,1 +1,1 @@
-# hankyu-translation-tools
+# Hankyu: Translation Tools
