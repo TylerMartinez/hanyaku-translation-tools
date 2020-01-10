@@ -1,0 +1,1 @@
+# hankyu-translation-tools
