@@ -1,0 +1,42 @@
+{
+  "name": "hanyaku",
+  "version": "1.0.0",
+  "description": "Hanyaku: Translation Tools for livestreaming content translations",
+  "main": "main.js",
+  "scripts": {
+    "build": "webpack --config ./webpack.config.js",
+    "start": "npm run build && electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TylerMartinez/hanyaku-translation-tools"
+  },
+  "keywords": [
+    "Translation",
+    "Streaming",
+    "Tools"
+  ],
+  "author": "Tyler Martinez",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/TylerMartinez/hanyaku-translation-tools/issues"
+  },
+  "homepage": "https://github.com/TylerMartinez/hanyaku-translation-tools#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.4.2",
+    "electron": "^7.1.8",
+    "html-webpack-plugin": "^3.2.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "style-loader": "^1.1.2",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
+  },
+  "dependencies": {}
+}
