@@ -4,8 +4,10 @@
   "description": "Hanyaku: Translation Tools for livestreaming content translations",
   "main": "main.js",
   "scripts": {
-    "build": "webpack --config ./webpack.config.js",
-    "start": "npm run build && electron ."
+    "build": "webpack --mode production --config ./webpack.config.js",
+    "start": "npm run build && electron .",
+    "execute": "electron .",
+    "webpack-dev": "webpack --mode development --watch"
   },
   "repository": {
     "type": "git",
@@ -30,6 +32,8 @@
     "babel-loader": "^8.0.6",
     "css-loader": "^3.4.2",
     "electron": "^7.1.8",
+    "electron-reload": "^1.5.0",
+    "file-loader": "^5.0.2",
     "html-webpack-plugin": "^3.2.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -38,5 +42,7 @@
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "glob": "^7.1.6"
+  }
 }

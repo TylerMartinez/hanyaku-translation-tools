@@ -1,4 +1,7 @@
 const { app, BrowserWindow } = require('electron')
+var glob = require("glob")
+
+require('electron-reload')('./dist/**/*');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -19,6 +22,7 @@ function createWindow () {
 
   // Open the DevTools.
   win.webContents.openDevTools()
+  //BrowserWindow.addDevToolsExtension('C:\\Users\\Tyler\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\fmkadmapgofadopljbjfkapdkoienihi\\4.4.0_0')
 
   // Emitted when the window is closed.
   win.on('closed', () => {
