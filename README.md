@@ -1,1 +1,1 @@
-# Hanyaku: Translation Tools
+# Honyaku: Translation Tools
