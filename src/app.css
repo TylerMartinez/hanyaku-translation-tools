@@ -1,7 +1,143 @@
+/* Fonts */
+@font-face{
+  font-family: "Montserrat Medium";
+  src: url(./fonts/Montserrat-Medium.ttf) format("truetype");
+}
+@font-face{
+  font-family: "Montserrat Black";
+  src: url(./fonts/Montserrat-Black.ttf) format("truetype");
+}
+@font-face{
+  font-family: "BenchNine Regular";
+  src: url(./fonts/BenchNine-Regular.ttf) format("truetype");
+}
+@font-face{
+  font-family: "BenchNine Bold";
+  src: url(./fonts/BenchNine-Bold.ttf) format("truetype");
+}
+@font-face{
+  font-family: "Sawarabi Gothic";
+  src: url(./fonts/SawarabiGothic-Regular.ttf) format("truetype");
+}
+
+
 html, body {
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #282828;
+  background-color: #282B2F;
+}
+
+#root, .app {
+  height: 100%;
+}
+
+.viewport {
+  height: calc(100% - 32px);
+}
+
+.full-height {
+  height: 100%;
+}
+
+.title-bar {
+  background-color: #1F2326;
+  height: 22px;
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+}
+
+.title-actions {
+  position: absolute;
+  right: 0;
+  top: 0;
+  -webkit-app-region: no-drag;
+}
+
+.title-button {
+  height: 22px;
+  width: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.title-button:hover {
+  background-color: #23252A;
+}
+
+.honyaku {
+  color: #bd3922;
+  font-size: 13px;
+  font-family: "Montserrat Black";
+  padding-top: 3px;
+  padding-left: 4px;
+}
+
+.section-title {
+  margin-top: 10px;
+  font-family: "BenchNine Regular";
+  font-size: 28px;
+  color: #A1B2BC;
+  user-select: none;
+}
+
+.section-japanese {
+  margin-top: 10px;
+  font-family: "Sawarabi Gothic";
+  font-size: 25px;
+  color: #A1B2BC;
+  user-select: none;
+}
+
+.section {
+  background-color: #313438;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 10px;
+  border-radius: 4px;
+}
+
+@media only screen and (max-width: 575px) {
+  .section {
+    background-color: #313438;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  .section-title, .section-japanese {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+  }
+}
+
+.remaining-section {
+  height: calc(100% - 227px);
+}
+
+.section-content {
+  font-family: "Montserrat Medium";
+  color: #DDDDDD;
+  padding: 10px;
+  font-size: 13px;
+}
+
+input {
+  padding-left: 5px;
+  padding-top: 2px;
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 100%;
+  height: 30px;
+  margin-right: 10px;
+  background: #3C3F44;
+  border: none;
+  border-radius: 4px;
+  font-family: "Montserrat Medium";
+  color: #DDDDDD;
+  outline: none;
 }

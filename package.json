@@ -1,7 +1,7 @@
 {
-  "name": "hanyaku",
+  "name": "honyaku",
   "version": "1.0.0",
-  "description": "Hanyaku: Translation Tools for livestreaming content translations",
+  "description": "Honyaku: Translation Tools for livestreaming content translations",
   "main": "main.js",
   "scripts": {
     "build": "webpack --mode production --config ./webpack.config.js",

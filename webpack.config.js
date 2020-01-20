@@ -4,6 +4,7 @@ const webpack = require("webpack");
 module.exports = {
   entry: "./src/index.js",
   mode: "development",
+  devtool: "source-map",
   target: 'electron-renderer',
   module: {
     rules: [
@@ -18,7 +19,7 @@ module.exports = {
         use: ["style-loader", "css-loader"]
       },
       {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {
             loader: 'file-loader',
@@ -26,6 +27,19 @@ module.exports = {
               name: '[name].[ext]',
               outputPath: 'fonts/',
               publicPath: 'dist/fonts'
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'images/',
+              publicPath: 'dist/images'
             }
           }
         ]
