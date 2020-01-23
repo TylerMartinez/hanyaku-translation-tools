@@ -6,7 +6,7 @@ class Splash extends Component{
   render(){
     return(
       <div className="container full-height">
-        <div className="row">
+        <div className="row section-title">
           <TranslatingTitle value="New Project" translation="新しいプロジェクト"/>
         </div>
         <div className="section">

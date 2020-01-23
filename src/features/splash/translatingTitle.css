@@ -1,0 +1,22 @@
+.translating-title-container {
+    height: 47px;
+}
+
+.translating-title-eng {
+    margin-top: 10px;
+    font-family: "BenchNine Regular";
+    font-size: 28px;
+    color: #A1B2BC;
+    user-select: none;
+    position: absolute;
+}
+
+.translating-title-jap {
+    margin-top: 10px;
+    font-family: "Sawarabi Gothic";
+    font-size: 25px;
+    color: #A1B2BC;
+    user-select: none;
+    opacity: 0;
+    position: absolute;
+}

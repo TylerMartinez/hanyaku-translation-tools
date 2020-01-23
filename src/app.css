@@ -84,14 +84,6 @@ html, body {
   user-select: none;
 }
 
-.section-japanese {
-  margin-top: 10px;
-  font-family: "Sawarabi Gothic";
-  font-size: 25px;
-  color: #A1B2BC;
-  user-select: none;
-}
-
 .section {
   background-color: #313438;
   margin-left: -15px;
@@ -116,7 +108,7 @@ html, body {
 }
 
 .remaining-section {
-  height: calc(100% - 227px);
+  height: calc(100% - 250px);
 }
 
 .section-content {
