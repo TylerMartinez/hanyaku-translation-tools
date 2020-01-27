@@ -10,6 +10,17 @@ import Close from "./images/window-close-regular.svg";
 const window = require('electron').remote.getCurrentWindow();
 
 class App extends Component {
+  //Constructor
+  constructor(props) {
+    super(props);
+
+    // State
+    this.state = {
+      currentProject: null,
+      globalSettings: null
+    };
+  }
+
   // Functions
   onMaximize() {
     if(!window.isMaximized())
