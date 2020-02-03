@@ -2,7 +2,7 @@ import { CREATE_PROJECT } from "../actionTypes";
 
 const initialState = {};
 
-const project = (state = initialState, action) => {
+const info = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_PROJECT: {
       return action.payload;
@@ -13,4 +13,4 @@ const project = (state = initialState, action) => {
   }
 };
 
-export default project;
+export default info;

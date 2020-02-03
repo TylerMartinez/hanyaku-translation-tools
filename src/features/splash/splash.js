@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { inputStateUpdate, liftedStateUpdate } from "../shared/stateUtils.js";
 import { createProject } from "../../redux/actions";
+import { saveProject } from "../shared/projectUtils";
 import "./splash.css";
 import "../../css/buttons.css";
 import TranslatingTitle from "./translatingTitle.js";
@@ -24,6 +25,8 @@ class Splash extends Component {
   // Functions
   createNewProject(){
     this.props.createProject(this.state);
+    
+    saveProject();
   }
 
   // Render
