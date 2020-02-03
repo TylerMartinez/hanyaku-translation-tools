@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { inputStateUpdate, liftedStateUpdate } from "../shared/stateUtils.js";
+import { createProject } from "../../redux/actions";
 import "./splash.css";
 import "../../css/buttons.css";
 import TranslatingTitle from "./translatingTitle.js";
@@ -19,8 +22,8 @@ class Splash extends Component {
   }
 
   // Functions
-  inputStateUpdate(event) {
-    this.setState({ [event.target.name]: event.target.value });
+  createNewProject(){
+    this.props.createProject(this.state);
   }
 
   // Render
@@ -37,7 +40,7 @@ class Splash extends Component {
                 name="projectName"
                 type="text"
                 placeholder="Project Name"
-                onChange={(e) => this.inputStateUpdate(e)} />
+                onChange={(e) => inputStateUpdate(e, this)} />
             </div>
           </div>
           <div className="row">
@@ -46,7 +49,7 @@ class Splash extends Component {
                 name="projectMedium"
                 type="text" 
                 placeholder="Medium" 
-                onChange={(e) => this.inputStateUpdate(e)} />
+                onChange={(e) => inputStateUpdate(e, this)} />
             </div>
           </div>
           <div className="row">
@@ -55,13 +58,19 @@ class Splash extends Component {
                 name="projectTitle"
                 type="text" 
                 placeholder="Title" 
-                onChange={(e) => this.inputStateUpdate(e)} />
+                onChange={(e) => inputStateUpdate(e, this)} />
             </div>
           </div>
-          <FileInput />
+          <FileInput 
+            name="projectSaveLocation"
+            saveToState={(n, v) => liftedStateUpdate(n, v, this)}/>
           <div className="row">
             <div className="col-12">
-              <button className="action-button">Create Project</button>
+              <button 
+                onClick={() => this.createNewProject()}
+                className="action-button">
+                  Create Project
+                </button>
             </div>
           </div>
         </div>
@@ -78,4 +87,7 @@ class Splash extends Component {
   }
 }
 
-export default Splash;
+export default connect(
+  null,
+  { createProject }
+)(Splash);
