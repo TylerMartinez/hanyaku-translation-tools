@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { inputStateUpdate, liftedStateUpdate } from "../shared/stateUtils.js";
-import { createProject } from "../../redux/actions";
-import { saveProject } from "../shared/projectUtils";
+import { noEmptyValues } from "../shared/validationUtils";
+import { createProjectAction } from "../../redux/actions";
 import "./splash.css";
 import "../../css/buttons.css";
 import TranslatingTitle from "./translatingTitle.js";
@@ -23,14 +23,12 @@ class Splash extends Component {
   }
 
   // Functions
-  createNewProject(){
-    this.props.createProject(this.state);
-    
-    saveProject();
-  }
 
   // Render
   render() {
+    // Determine if the form is good to submit
+    var validForm = noEmptyValues(this.state);
+
     return (
       <div className="container full-height">
         <div className="row section-title">
@@ -69,8 +67,9 @@ class Splash extends Component {
             saveToState={(n, v) => liftedStateUpdate(n, v, this)}/>
           <div className="row">
             <div className="col-12">
-              <button 
-                onClick={() => this.createNewProject()}
+              <button
+                disabled={!validForm}
+                onClick={() => this.props.createProject(this.state)}
                 className="action-button">
                   Create Project
                 </button>
@@ -90,7 +89,13 @@ class Splash extends Component {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    createProject: content => createProjectAction(dispatch, content)
+  }
+};
+
 export default connect(
   null,
-  { createProject }
+  mapDispatchToProps
 )(Splash);
