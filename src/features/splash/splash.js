@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { inputStateUpdate, liftedStateUpdate } from "../shared/stateUtils.js";
 import { noEmptyValues } from "../shared/validationUtils";
-import { createProjectAction } from "../../redux/actions";
+import { createProjectAction } from "../../redux/actions/projectActions";
 import "./splash.css";
 import "../../css/buttons.css";
 import TranslatingTitle from "./translatingTitle.js";

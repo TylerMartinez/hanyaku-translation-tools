@@ -2,7 +2,7 @@ const { app } = require('electron').remote;
 const { objectsHaveSameKeys } = require('./validationUtils')
 const fs = require('fs');
 
-const configPath = app.getPath('appData') + 'config.json';
+const configPath = app.getPath('appData') + '\honyaku\config.json';
 const initialState = {
     recentProjects: []
 };
@@ -14,16 +14,21 @@ export function loadConfig() {
     }
 
     // Read in config file
-    var config = fs.readFileSync(configPath);
+    var config = JSON.parse(fs.readFileSync(configPath));
 
-    return JSON.parse(config);
+    // Check to see if config is in proper state otherwise default to intial
+    if(!objectsHaveSameKeys(config, initialState))
+        config = initialState;
+
+    return config;
 };
 
-export function updateConfig(config) {
-    // Check to make sure confing object matches
-    if(objectsHaveSameKeys()){
-        fs.writeFileSync(configPath, JSON.stringify(config));
-    } else {
-        console.error("Attempt to update config failed due to object signature!")
-    }
+export function updateConfig(value, property) {
+    fs.writeFile(
+        configPath, 
+        JSON.stringify({...loadConfig(), [property]: value}),
+        (err, result) => {
+            if (err) console.log('error', err);
+        }
+    );
 };
