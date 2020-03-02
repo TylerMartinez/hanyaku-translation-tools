@@ -7,6 +7,7 @@ import "./splash.css";
 import "../../css/buttons.css";
 import TranslatingTitle from "./translatingTitle.js";
 import FileInput from "../shared/fileInput";
+import RecentProjects from "./recentProjects.js";
 
 class Splash extends Component {
   //Constructor
@@ -80,8 +81,8 @@ class Splash extends Component {
           <TranslatingTitle value="Recent Projects" translation="最近のプロジェクト" />
         </div>
         <div className="section remaining-section">
-          <div className="row section-content">
-            No recent projects . . .
+          <div className="row section-content full-height">
+            <RecentProjects/>
           </div>
         </div>
       </div>

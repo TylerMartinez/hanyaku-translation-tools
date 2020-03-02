@@ -1,7 +1,10 @@
 import {
   CREATE_PROJECT_REQUEST,
   CREATE_PROJECT_FAIL,
-  CREATE_PROJECT_SUCCESS
+  CREATE_PROJECT_SUCCESS,
+  LOAD_PROJECT_REQUEST,
+  LOAD_PROJECT_SUCCESS,
+  LOAD_PROJECT_FAIL
 } from "../actionTypes";
 
 const initialState = {
@@ -29,6 +32,30 @@ const project = (state = initialState, action) => {
     }
 
     case CREATE_PROJECT_SUCCESS: {
+      return {
+        isLoading: false,
+        error: null,
+        data: action.payload
+      }
+    }
+
+    case LOAD_PROJECT_REQUEST: {
+      return {
+        isLoading: true,
+        error: null,
+        data: state.data
+      }
+    }
+
+    case LOAD_PROJECT_FAIL: {
+      return {
+        isLoading: false,
+        error: action.payload,
+        data: state.data
+      }
+    }
+
+    case LOAD_PROJECT_SUCCESS: {
       return {
         isLoading: false,
         error: null,

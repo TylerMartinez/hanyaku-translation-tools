@@ -41,6 +41,16 @@ html, body {
   height: 100%;
 }
 
+.full-width {
+  width: 100%;
+}
+
+.full-height-action {
+  height: calc(100% - 50px);
+  margin-top: 10px;
+  overflow: auto;
+}
+
 .title-bar {
   background-color: #1F2326;
   height: 22px;
@@ -114,7 +124,8 @@ html, body {
 .section-content {
   font-family: "Montserrat Medium";
   color: #DDDDDD;
-  padding: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
   font-size: 13px;
 }
 
@@ -130,4 +141,18 @@ input {
   font-family: "Montserrat Medium";
   color: #DDDDDD;
   outline: none;
+}
+
+div::-webkit-scrollbar {
+  width: 10px;
+}
+ 
+div::-webkit-scrollbar-thumb {
+  background: #666666;
+  border-radius: 20px;
+}
+
+div::-webkit-scrollbar-track {
+  background: #282B2F;
+  border-radius: 20px;
 }

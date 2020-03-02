@@ -6,16 +6,19 @@ import {
     UPDATE_CONFIG_FAIL
 } from "../actionTypes";
 
-export const updateRecentProjectsAction = async (dispatch, content) => {
+export const updateRecentProjectsAction = async (dispatch, content, remove) => {
     // Get recentProject copy from state
     var recentProjects = [];
     store.getState().config.data.recentProjects.forEach(x => {
         recentProjects.push({...x});
     });
 
-    // Update recent Projects
-    if (!recentProjects.filter(x => x.projectSaveLocation === content.projectSaveLocation
-                                        && x.projectName === content.projectName).length)
+    // Update recent Projects removing the new content to be added to front or removed
+    recentProjects = recentProjects.filter(x => x.projectSaveLocation !== content.projectSaveLocation
+                                            || x.projectName !== content.projectName);
+    
+    // If remove is defined lets not push
+    if(!remove)
         recentProjects.push(content)
 
     // Update config
