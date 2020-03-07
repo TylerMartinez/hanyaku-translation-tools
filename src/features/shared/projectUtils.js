@@ -1,27 +1,29 @@
-import store from "../../redux/store";
-import { existsSync } from "fs";
+const fs = require('fs')
 
-const fs = require('fs');
-
-export async function saveProject(content) {
-    await fs.writeFile(
-        content.projectSaveLocation + "\\" + content.projectName + ".hon",
-        JSON.stringify(content),
-        (err, result) => {
-            if (err) console.log('error', err);
-        }
-    );
+export async function saveProject (content) {
+  await fs.writeFile(
+    content.projectSaveLocation + '\\' + content.projectName + '.hon',
+    JSON.stringify(content),
+    (err, result) => {
+      if (err) console.log('error', err)
+    }
+  )
 }
 
-export function loadProject(project) {
-    var filePath = project.projectSaveLocation + "\\" + project.projectName + ".hon";
-    var exists = fs.existsSync(filePath);
+export function loadProject (project) {
+  var filePath = project.projectSaveLocation + '\\' + project.projectName + '.hon'
+  var exists = fs.existsSync(filePath)
 
-    // Throw error if file does not exist
-    if (!exists)
-        throw { project: project, message: "Project does not exist!" }
+  // Throw error if file does not exist
+  if (!exists) {
+    var error = {
+      project: project,
+      message: 'Project does not exist!'
+    }
+    throw error
+  }
 
-    var project = fs.readFileSync(filePath);
+  var result = fs.readFileSync(filePath)
 
-    return JSON.parse(project);
+  return JSON.parse(result)
 }

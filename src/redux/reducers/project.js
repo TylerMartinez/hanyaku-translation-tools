@@ -5,13 +5,13 @@ import {
   LOAD_PROJECT_REQUEST,
   LOAD_PROJECT_SUCCESS,
   LOAD_PROJECT_FAIL
-} from "../actionTypes";
+} from '../actionTypes'
 
 const initialState = {
   isLoading: null,
   error: null,
   data: null
-};
+}
 
 const project = (state = initialState, action) => {
   switch (action.type) {
@@ -64,9 +64,9 @@ const project = (state = initialState, action) => {
     }
 
     default: {
-      return state;
+      return state
     }
   }
-};
+}
 
-export default project;
+export default project
