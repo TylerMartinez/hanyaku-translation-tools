@@ -29,7 +29,7 @@ const RecentProjectsStyle = styled.div`
   }
 
   .project-item:hover {
-      background-color: ${props => props.theme.muted1};
+      background-color: ${props => props.theme.highlight1};
       cursor: pointer;
   }
 `

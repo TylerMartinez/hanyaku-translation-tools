@@ -14,7 +14,7 @@ const Base = {
   title1: '#A1B2BC',
   titlebar: '#1F2326',
   titlebutton: '#99AAB5',
-  titlebutton_hover: 'bd3922',
+  titlebutton_hover: '#bd3922',
   logo: '#bd3922',
 
   scrollbar_thumb: '#666666',
