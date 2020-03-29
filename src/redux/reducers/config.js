@@ -1,4 +1,4 @@
-import { loadConfig } from '../../features/shared/configUtils'
+import { loadConfig } from '../../utils/configUtils.js'
 import {
   UPDATE_CONFIG_REQUEST,
   UPDATE_CONFIG_SUCCESS,

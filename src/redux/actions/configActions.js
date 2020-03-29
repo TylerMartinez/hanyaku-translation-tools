@@ -1,5 +1,5 @@
 import store from '../store'
-import { updateConfig } from '../../features/shared/configUtils'
+import { updateConfig } from '../../utils/configUtils'
 import {
   UPDATE_CONFIG_REQUEST,
   UPDATE_CONFIG_SUCCESS,

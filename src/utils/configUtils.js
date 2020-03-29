@@ -1,13 +1,13 @@
-const { app } = require('electron').remote
-const { objectsHaveSameKeys } = require('./validationUtils')
-const fs = require('fs')
+import { remote }  from 'electron'
+import { objectsHaveSameKeys } from './validationUtils'
+import fs from 'fs'
 
-const configPath = app.getPath('appData') + '\\honyaku\\config.json'
+const configPath = remote.app.getPath('appData') + '\\honyaku\\config.json'
 const initialState = {
   recentProjects: []
 }
 
-export function loadConfig () {
+export const loadConfig = () => {
   // Check if config exists and if not create it
   if (!fs.existsSync(configPath)) {
     fs.writeFileSync(configPath, JSON.stringify(initialState))
@@ -23,17 +23,17 @@ export function loadConfig () {
     }
 
     return config
-  } catch {
+  } catch (e) {
     return initialState
   }
-};
+}
 
-export function updateConfig (value, property) {
+export const updateConfig = (value, property) => {
   fs.writeFile(
     configPath,
     JSON.stringify({ ...loadConfig(), [property]: value }),
-    (err, result) => {
+    (err) => {
       if (err) console.log('error', err)
     }
   )
-};
+}

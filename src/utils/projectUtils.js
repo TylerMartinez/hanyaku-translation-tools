@@ -1,16 +1,16 @@
-const fs = require('fs')
+import fs from 'fs'
 
-export async function saveProject (content) {
+export const saveProject = async (content) => {
   await fs.writeFile(
     content.projectSaveLocation + '\\' + content.projectName + '.hon',
     JSON.stringify(content),
-    (err, result) => {
+    (err) => {
       if (err) console.log('error', err)
     }
   )
 }
 
-export function loadProject (project) {
+export const loadProject = (project) => {
   var filePath = project.projectSaveLocation + '\\' + project.projectName + '.hon'
   var exists = fs.existsSync(filePath)
 

@@ -8,7 +8,7 @@ import {
   LOAD_PROJECT_FAIL
 } from '../actionTypes'
 
-import { saveProject, loadProject } from '../../features/shared/projectUtils'
+import { saveProject, loadProject } from '../../utils/projectUtils'
 
 export const createProjectAction = async (dispatch, content) => {
   var success = false
