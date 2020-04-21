@@ -8,7 +8,7 @@ require('electron-reload')('./dist/**/*')
 // be closed automatically when the JavaScript object is garbage collected.
 let win
 
-const createWindow () => {
+const createWindow = () => {
   // Create the browser window.
   win = new BrowserWindow({
     width: 800,
@@ -22,9 +22,9 @@ const createWindow () => {
   })
 
   // UPDATE FOR YOUR ENVIRONMENT: REACT DEV TOOLS
-  BrowserWindow.addDevToolsExtension(
-    path.join(os.homedir(), 'AppData/Local/Google/Chrome/User Data/Profile 1/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.5.0_0')
-  )
+  // BrowserWindow.addDevToolsExtension(
+  //   path.join(os.homedir(), 'AppData/Local/Google/Chrome/User Data/Profile 1/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.5.0_0')
+  // )
   // BrowserWindow.addDevToolsExtension(
   //   path.join(os.homedir(), 'AppData/Local/Google/Chrome/User Data/Profile 1/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.17.0_0')
   // )
