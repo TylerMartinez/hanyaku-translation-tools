@@ -1,7 +1,7 @@
 import fs from 'fs'
 
-export const saveProject = async (content) => {
-  await fs.writeFile(
+export function* saveProject(content) {
+  yield fs.writeFile(
     content.projectSaveLocation + '\\' + content.projectName + '.hon',
     JSON.stringify(content),
     (err) => {

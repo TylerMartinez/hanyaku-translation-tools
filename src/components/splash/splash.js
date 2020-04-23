@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { noEmptyValuesArr } from '../../utils/validationUtils'
-import { createProjectAction } from '../../redux/actions/projectActions'
 import { Button, Input } from '../atoms'
 import TranslatingTitle from './translatingTitle.js'
 import { FileInput } from '../molecules'
 import { Section, Viewport, Row, Column } from '../layouts'
 import RecentProjects from './recentProjects.js'
+import { CREATE_PROJECT_REQUEST } from '../../redux/actionTypes'
 
 // Component
 const Splash = () => {
@@ -30,7 +30,7 @@ const Splash = () => {
 
   // Actions
   const dispatch = useDispatch()
-  const createProject = () => createProjectAction(dispatch, getFullState())
+  const createProject = () => dispatch({ type: CREATE_PROJECT_REQUEST, payload: getFullState() })
 
   // Variables
   var validForm = noEmptyValuesArr([projectName, projectMedium, projectTitle, projectSaveLocation])

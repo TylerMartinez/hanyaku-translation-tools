@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button } from '../atoms'
-import { loadProjectAction } from '../../redux/actions/projectActions'
+import { LOAD_PROJECT_REQUEST } from '../../redux/actionTypes'
 import { Row, Column } from '../layouts'
 
 // Style
@@ -42,7 +42,7 @@ const RecentProjects = () => {
 
   // Actions
   const dispatch = useDispatch()
-  const loadProject = project => loadProjectAction(dispatch, project)
+  const loadProject = project => dispatch({ type: LOAD_PROJECT_REQUEST, payload: project})
 
   // Functions
   const getListRender = () => {

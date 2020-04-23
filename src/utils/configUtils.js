@@ -28,12 +28,14 @@ export const loadConfig = () => {
   }
 }
 
-export const updateConfig = (value, property) => {
-  fs.writeFile(
+export function* updateConfig(config, value, property) {
+  yield fs.writeFile(
     configPath,
-    JSON.stringify({ ...loadConfig(), [property]: value }),
+    JSON.stringify({ ...config, [property]: value }),
     (err) => {
-      if (err) console.log('error', err)
+      if (err) {
+        console.log('error', err)
+      }
     }
   )
 }

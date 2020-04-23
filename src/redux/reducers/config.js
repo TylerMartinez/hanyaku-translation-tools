@@ -35,7 +35,7 @@ const config = (state = initialState, action) => {
     case UPDATE_CONFIG_FAIL: {
       return {
         isLoading: false,
-        error: action.payload,
+        error: action.payload.error,
         data: state.data
       }
     }
