@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -34,6 +34,14 @@ const TranslatingTitle = props => {
     translationClass: 'translating-title-jap',
     animating: false
   })
+  const isMountedRef = useRef(null)
+
+  // Effect Hooks
+  useEffect(() => {
+    isMountedRef.current = true;
+
+    return () => isMountedRef.current = false;
+  })
 
   // Functions
   const onEnter = () => {
@@ -45,11 +53,13 @@ const TranslatingTitle = props => {
       })
 
       setTimeout(() => {
-        setState({
-          class: 'translating-title-eng',
-          translationClass: 'translating-title-jap',
-          animating: false
-        })
+        if (isMountedRef.current) {
+          setState({
+            class: 'translating-title-eng',
+            translationClass: 'translating-title-jap',
+            animating: false
+          })
+        }
       }, 2500)
     }
   }

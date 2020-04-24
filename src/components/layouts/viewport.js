@@ -11,7 +11,7 @@ const ViewportStyle = styled.div`
 // Componnent
 const Viewport = props => {
   return (
-    <ViewportStyle className='container d-flex flex-column'>
+    <ViewportStyle className={(props.fluid === true ? 'container-fluid' : 'container') + ' d-flex flex-column'}>
       {props.children}
     </ViewportStyle>
   )
@@ -19,6 +19,7 @@ const Viewport = props => {
 
 // Proptypes
 Viewport.propTypes = {
+  fluid: PropTypes.bool,
   children: PropTypes.any
 }
 

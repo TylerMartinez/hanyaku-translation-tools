@@ -4,6 +4,8 @@ import styled from 'styled-components'
 
 // Style
 const ColumnStyle = styled.div`
+  display: ${props => props.col === 0 ? 'none' : 'block'};
+
   div::-webkit-scrollbar {
   width: 10px;
   }
@@ -40,7 +42,7 @@ const Column = props => {
   }
 
   return (
-    <ColumnStyle className={getClassName()} >
+    <ColumnStyle col={props.col} className={getClassName()} >
       {props.children}
     </ColumnStyle>
   )

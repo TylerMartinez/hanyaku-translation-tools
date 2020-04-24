@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 // Style
 const RowStyle = styled.div`
-  padding-top: 10px;
+
 `
 
 // Component

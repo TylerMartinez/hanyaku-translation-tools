@@ -18,7 +18,7 @@ const FileInput = props => {
     if (fileDestination) {
       setSelectedFile(fileDestination[0])
 
-      props.saveToState(fileDestination[0])
+      props.saveToState(props.name, fileDestination[0])
     }
   }
 

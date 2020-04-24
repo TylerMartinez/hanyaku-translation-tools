@@ -1,6 +1,7 @@
 import electron from 'electron'
 import React from 'react'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
 import './css/bootstrap-grid.min.css'
 import './css/animations.css'
 import './css/fonts.css'
@@ -8,6 +9,7 @@ import './css/global.css'
 import { ThemeProvider } from 'styled-components'
 import Base from './components/themes/base.js'
 import Splash from './components/splash/splash.js'
+import Workbench from './components/workbench/workbench'
 import Minimize from './images/window-minimize-regular'
 import Maximize from './images/window-maximize-regular'
 import Close from './images/window-close-regular'
@@ -62,6 +64,10 @@ const AppStyle = styled.div`
 const window = electron.remote.getCurrentWindow()
 
 const App = () => {
+
+  // Selectors
+  const project = useSelector(state => state.project.data)
+
   // Functions
   const onMaximize = () => {
     if (!window.isMaximized()) { window.maximize() } else { window.unmaximize() }
@@ -87,7 +93,10 @@ const App = () => {
             </button>
           </div>
         </div>
-        <Splash />
+        {project 
+          ? <Workbench/>
+          : <Splash />
+        }
       </AppStyle>
     </ThemeProvider>
   )

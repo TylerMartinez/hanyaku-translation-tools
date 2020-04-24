@@ -38,8 +38,11 @@ const Splash = () => {
   return (
     <Viewport>
       <Row>
-        <TranslatingTitle value='New Project' translation='新しいプロジェクト' />
+        <Column>
+          <TranslatingTitle value='New Project' translation='新しいプロジェクト' />
+        </Column>
       </Row>
+      
       <Section>
         <Row>
           <Column col={12}>
@@ -87,7 +90,9 @@ const Splash = () => {
         </Row>
       </Section>
       <Row>
-        <TranslatingTitle value='Recent Projects' translation='最近のプロジェクト' />
+        <Column>
+          <TranslatingTitle value='Recent Projects' translation='最近のプロジェクト' />
+        </Column>
       </Row>
       <Section fill={true}>
         <RecentProjects />

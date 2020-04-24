@@ -5,8 +5,7 @@ import styled from 'styled-components'
 // Style
 const SectionStyle = styled.div`
   background-color: ${props => props.theme.bg2};
-  margin-left: -15px;
-  margin-right: -15px;
+  padding-top: 10px;
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 10px;
