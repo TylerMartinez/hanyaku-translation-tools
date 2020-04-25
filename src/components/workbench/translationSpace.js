@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Row, Column } from '../layouts'
 import { TextArea, Title } from '../atoms'
+import { JapaneseInput } from '../molecules'
 
 // Component
 const TranslationSpace = () => {
-
   // State Hooks
+  var [romajiValue, setRomajiValue] = useState('')
 
   // Functions
 
@@ -19,15 +20,15 @@ const TranslationSpace = () => {
         <Column>
           <Title>
             Original
-       </Title>
-          <TextArea rows="5" />
+          </Title>
+          <JapaneseInput rows="5" onRomajiUpdate={(romaji) => setRomajiValue(romaji)}/>
           <Title>
             Romaji
-       </Title>
-          <TextArea rows="5" />
+          </Title>
+          <TextArea rows="5" value={romajiValue} onChange={(e) => setRomajiValue(e.target.value)}/>
           <Title>
             Translation
-       </Title>
+          </Title>
           <TextArea rows="5" />
         </Column>
       </Row>
