@@ -1,0 +1,21 @@
+/* Fonts */
+@font-face{
+  font-family: "Montserrat Medium";
+  src: url(../fonts/Montserrat-Medium.ttf) format("truetype");
+}
+@font-face{
+  font-family: "Montserrat Black";
+  src: url(../fonts/Montserrat-Black.ttf) format("truetype");
+}
+@font-face{
+  font-family: "BenchNine Regular";
+  src: url(../fonts/BenchNine-Regular.ttf) format("truetype");
+}
+@font-face{
+  font-family: "BenchNine Bold";
+  src: url(../fonts/BenchNine-Bold.ttf) format("truetype");
+}
+@font-face{
+  font-family: "Sawarabi Gothic";
+  src: url(../fonts/SawarabiGothic-Regular.ttf) format("truetype");
+}

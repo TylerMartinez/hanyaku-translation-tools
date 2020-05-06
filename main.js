@@ -1,18 +1,33 @@
 const { app, BrowserWindow } = require('electron')
+const path = require('path')
+const os = require('os')
+
+require('electron-reload')('./dist/**/*')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
 
-function createWindow () {
+const createWindow = () => {
   // Create the browser window.
   win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
       nodeIntegration: true
-    }
+    },
+    frame: false,
+    minWidth: 620,
+    minHeight: 600
   })
+
+  // UPDATE FOR YOUR ENVIRONMENT: REACT DEV TOOLS
+  BrowserWindow.addDevToolsExtension(
+    path.join(os.homedir(), 'AppData/Local/Google/Chrome/User Data/Profile 1/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.6.0_15')
+  )
+  BrowserWindow.addDevToolsExtension(
+    path.join(os.homedir(), 'AppData/Local/Google/Chrome/User Data/Profile 1/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.17.0_0')
+  )
 
   // and load the index.html of the app.
   win.loadFile('./index.html')
