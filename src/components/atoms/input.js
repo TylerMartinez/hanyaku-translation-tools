@@ -9,7 +9,7 @@ const Input = styled.input`
   background: ${props => props.theme.inputBackground};
   border: none;
   border-radius: 4px;
-  font-family: "Montserrat Medium";
+  font-family: ${props => props.theme.english};
   color: ${props => props.theme.text};
   outline: none;
 `

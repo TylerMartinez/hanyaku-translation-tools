@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: ['./src/index.js', './node_modules/autokanji/AutoKanjiTrie.json.gz'],
   mode: 'development',
   devtool: 'source-map',
   target: 'electron-renderer',
@@ -26,6 +26,19 @@ module.exports = {
               name: '[name].[ext]',
               outputPath: 'fonts/',
               publicPath: 'dist/fonts'
+            }
+          }
+        ]
+      },
+      {
+        test: /\.gz/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: '../',
+              publicPath: '../'
             }
           }
         ]

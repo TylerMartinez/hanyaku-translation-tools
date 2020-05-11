@@ -9,7 +9,7 @@ const Button = styled.button`
   padding-left: 10px;
   padding-right: 10px;
   color: ${props => props.theme.text};
-  font-family: "Montserrat Medium";
+  font-family: ${props => props.theme.english};
   cursor: pointer;
   outline: none;
 

@@ -9,7 +9,7 @@ const TranslatingTitleStyle = styled.div`
 
   .translating-title-eng {
       margin-top: 10px;
-      font-family: "BenchNine Regular";
+      font-family: ${props => props.theme.englishTitle};
       font-size: 28px;
       color: ${props => props.theme.title1};
       user-select: none;
@@ -18,7 +18,7 @@ const TranslatingTitleStyle = styled.div`
 
   .translating-title-jap {
       margin-top: 10px;
-      font-family: "Sawarabi Gothic";
+      font-family: ${props => props.theme.japanese};
       font-size: 25px;
       color: ${props => props.theme.title1};
       user-select: none;

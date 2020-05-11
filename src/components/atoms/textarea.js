@@ -7,7 +7,7 @@ const TextArea = styled.textarea`
   resize: ${props => props.resize ? 'inital' : 'none'};
   border: none;
   border-radius: 4px;
-  font-family: "Montserrat Medium";
+  font-family: ${props => props.theme.english};
   color: ${props => props.theme.text};
   outline: none;
 

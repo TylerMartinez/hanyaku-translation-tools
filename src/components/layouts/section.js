@@ -11,7 +11,7 @@ const SectionStyle = styled.div`
   padding-bottom: 10px;
   border-radius: 4px;
 
-  font-family: "Montserrat Medium";
+  font-family: ${props => props.theme.english};
   color: ${props => props.theme.color1};
   font-size: 13px;
 

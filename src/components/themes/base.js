@@ -1,10 +1,21 @@
 const Base = {
+  // Fonts
+  japanese: 'Sawarabi Gothic',
+  english: 'Montserrat Medium',
+  englishTitle: 'BenchNine Regular', 
+
+  // Colors
   primary: '#bd3922',
   primaryHover: '#b5311a',
   text: '#dddddd',
   disabled: '#282B2F',
   disabledText: '#666666',
   inputBackground: '#3C3F44',
+
+  lightSocket: '#3C3F44',
+  lightOn: '#02691d',
+  lightOff: '#bd3922',
+  lightLabel: '#A1B2BC',
 
   bg1: '#282B2F',
   bg2: '#313438',
