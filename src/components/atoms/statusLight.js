@@ -34,9 +34,13 @@ const LightLabel = styled.div`
   color: ${props => props.theme.lightLabel};
   user-select: none;
   display: inline-block;
+  font-weight: bold;
 `
 
 const StatusLightStyle = styled.div`
+  display: inline-block;
+  height:30px;
+  margin-right:10px;
 `
 
 // Component

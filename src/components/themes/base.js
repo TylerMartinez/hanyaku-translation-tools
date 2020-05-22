@@ -17,6 +17,10 @@ const Base = {
   lightOff: '#bd3922',
   lightLabel: '#A1B2BC',
 
+  pill: '#bd3922',
+  pillHover: '#b5311a',
+  pillText: '#dddddd',
+
   bg1: '#282B2F',
   bg2: '#313438',
   color1: '#DDDDDD',

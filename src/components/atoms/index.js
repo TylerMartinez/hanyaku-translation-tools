@@ -3,6 +3,7 @@ import Input from './input'
 import Title from './title'
 import TextArea from './textarea'
 import StatusLight from './statusLight'
+import Pill from './pill'
 
 
 export {
@@ -10,5 +11,6 @@ export {
   Input,
   Title,
   TextArea,
-  StatusLight
+  StatusLight,
+  Pill
 }
