@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Viewport, Row, Column } from '../layouts'
+import { Viewport, Row } from '../layouts'
 import ReviewSpace from './reviewSpace'
 import TranslationSpace from './translationSpace'
 
@@ -7,7 +7,7 @@ import TranslationSpace from './translationSpace'
 const Workbench = () => {
 
   // State Hooks
-  const [reviewMode] = useState(false)
+  const [reviewMode] = useState(true)
 
   // Functions
 
@@ -17,13 +17,9 @@ const Workbench = () => {
 
   return (
     <Viewport fluid={true}>
-     <Row>
-       <Column col={reviewMode ? 10 : 0}>
-         <ReviewSpace/>
-       </Column>
-       <Column col={reviewMode ? 2 : 12}>
-         <TranslationSpace/>
-       </Column>
+     <Row fill={true}>
+        <ReviewSpace col={reviewMode ? 8 : 0}/>
+        <TranslationSpace col={reviewMode ? 4 : 12}/>
      </Row>
     </Viewport>
   )

@@ -208,8 +208,9 @@ const JapaneseInput = props => {
 
   // Render
   return (
-    <div>
+    <div className="d-flex flex-column flex-grow-1">
       <TextArea
+        className="flex-grow-1"
         ref={textArea}
         rows={props.rows}
         value={inputValue}

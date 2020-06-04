@@ -38,6 +38,10 @@ const Column = props => {
       result += " d-inline-flex justify-content-" + props.justify
     }
 
+    if(props.flex) {
+      result += " d-flex flex-column"
+    }
+
     return result
   }
 
@@ -52,7 +56,8 @@ const Column = props => {
 Column.propTypes = {
   col: PropTypes.number,
   children: PropTypes.any,
-  justify: PropTypes.oneOf(['start', 'end', 'center', 'between', 'around'])
+  justify: PropTypes.oneOf(['start', 'end', 'center', 'between', 'around']),
+  flex: PropTypes.bool
 }
 
 export default Column

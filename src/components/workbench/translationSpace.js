@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { Row, Column } from '../layouts'
+import PropTypes from 'prop-types'
+import { Column, ResizableSection } from '../layouts'
 import { TextArea, Title } from '../atoms'
 import { JapaneseInput } from '../molecules'
 
 // Component
-const TranslationSpace = () => {
+const TranslationSpace = props => {
   // State Hooks
   var [romajiValue, setRomajiValue] = useState('')
 
@@ -14,30 +15,34 @@ const TranslationSpace = () => {
 
   // Variables
 
+  // Render
   return (
-    <div>
-      <Row>
-        <Column>
-          <Title>
-            Original
-          </Title>
-          <JapaneseInput rows="5" onRomajiUpdate={(romaji) => setRomajiValue(romaji)}/>
-          <Title>
-            Romaji
-          </Title>
-          <TextArea rows="5" value={romajiValue} onChange={(e) => setRomajiValue(e.target.value)}/>
-          <Title>
-            Translation
-          </Title>
-          <TextArea rows="5" />
-        </Column>
-      </Row>
-    </div>
+    <Column col={props.col} flex={true}>
+      <ResizableSection>
+        <Title>
+          Original
+        </Title>
+        <JapaneseInput onRomajiUpdate={(romaji) => setRomajiValue(romaji)} />
+      </ResizableSection>
+      <ResizableSection>
+        <Title>
+          Romaji
+        </Title>
+        <TextArea className="flex-grow-1" value={romajiValue} onChange={(e) => setRomajiValue(e.target.value)} />
+      </ResizableSection>
+      <ResizableSection>
+        <Title>
+          Translation
+        </Title>
+        <TextArea className="flex-grow-1" />
+      </ResizableSection>
+    </Column>
   )
 }
 
 // Prop Types
 TranslationSpace.propTypes = {
+  col: PropTypes.number
 }
 
 export default TranslationSpace
