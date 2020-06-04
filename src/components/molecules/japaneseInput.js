@@ -10,6 +10,7 @@ const JapaneseInput = props => {
   var [inputValue, setInputValue] = useState('')
   var [kanjiMode, setKanjiMode] = useState('off')
   var [kanijSuggestions, setKanjiSuggestions] = useState([])
+  var [kanjiList, setKanjiList] = useState([])
 
   // Ref Hooks
   var textArea = useRef(null)
@@ -18,6 +19,7 @@ const JapaneseInput = props => {
   var cursorLocation = useRef(0)
   var applyingTranslation = useRef(false)
   var kanjiLocation = useRef(-1)
+  var kanjiInput = useRef("")
 
   // Effect Hooks
   useEffect(() => {
@@ -28,6 +30,7 @@ const JapaneseInput = props => {
     // Only run if not deletion or we are not applying translation
     if (deletionOccurred.current) {
       deletionOccurred.current = false
+      getRomaji()
       return
     }
     else if (applyingTranslation.current) {
@@ -40,17 +43,7 @@ const JapaneseInput = props => {
     const timer = setTimeout(() => {
 
       // Throw up the romaji
-      let kanaTokens = wanakana.tokenize(inputValue, { detailed: true })
-      let romaji = ''
-
-      kanaTokens.forEach(token => {
-        if (token.type === "hiragana" || token.type === "katakana")
-          romaji += wanakana.toRomaji(token.value, { upcaseKatakana: true, customKanaMapping: { ん: 'nn', ン: 'NN' } })
-        else
-          romaji += token.value
-      })
-
-      props.onRomajiUpdate(romaji)
+      getRomaji()
 
       // Set Translation gaurd
       applyingTranslation.current = true
@@ -62,6 +55,7 @@ const JapaneseInput = props => {
       translation = wanakana.toKana(translation, { customKanaMapping: { nn: 'ん', NN: 'ン' } })
 
       // Determine cursor location
+      console.log("SETTING CURSOR IN TIMEOUT TO: " + (translationStart.current + translation.length))
       cursorLocation.current = translationStart.current + translation.length
 
       // Complete translation
@@ -76,15 +70,14 @@ const JapaneseInput = props => {
       // If in kanji mode fetch the suggestions
       if (kanjiMode === "on") {
 
-        
         // Cut the kanji input out
-        var kanjiInput = translation.substring(kanjiLocation.current, cursorLocation.current)
+        kanjiInput.current = translation.substring(kanjiLocation.current, cursorLocation.current)
 
         // Get suggestions
-        setKanjiSuggestions(AutoKanji.find(kanjiInput))
+        setKanjiSuggestions(AutoKanji.find(kanjiInput.current))
       }
 
-    }, 300)
+    }, 500)
 
     // Cleanup the timer 
     return () => clearTimeout(timer)
@@ -98,6 +91,28 @@ const JapaneseInput = props => {
     }
   }
 
+  const getRomaji = () => {
+    let kanaTokens = wanakana.tokenize(inputValue, { detailed: true })
+    let romaji = ''
+
+    kanaTokens.forEach(token => {
+      if (token.type === "hiragana" || token.type === "katakana")
+        romaji += wanakana.toRomaji(token.value, { upcaseKatakana: true, customKanaMapping: { ん: 'nn', ン: 'NN' } })
+      else if(token.type === "kanji") {
+        var result = kanjiList.find(x => x.kanji === token.value)
+
+        if(result)
+          romaji += result.romaji
+        else
+          romaji += token.value
+      }
+      else
+        romaji += token.value
+    })
+
+    props.onRomajiUpdate(romaji)
+  }
+
   const parseKeyPress = e => {
     // Check kanji mode validation
     kanjiModeValidation(e)
@@ -107,53 +122,89 @@ const JapaneseInput = props => {
       translationStart.current = textArea.current.selectionStart
 
     // Check hotkeys
-    switch (e.keyCode) {
-
-      // K key: enable kanji mode
-      case 75:
-        if (e.ctrlKey) {
-          if (kanjiMode === 'off') {
-            setKanjiMode('on')
-            kanjiLocation.current = textArea.current.selectionStart
-          }
-          else {
-            setKanjiMode('off')
-            kanjiLocation.current = -1
-          }
+    if(e.keyCode === 75) {
+      // Control K: Kanji mode toggle
+      if (e.ctrlKey) {
+        if (kanjiMode === 'off') {
+          setKanjiMode('on')
+          kanjiLocation.current = textArea.current.selectionStart
         }
-
-        break;
-
-      case 8:
-      case 46:
-        deletionOccurred.current = true
-        break;
+        else {
+          setKanjiMode('off')
+          kanjiLocation.current = -1
+        }
+      }
+    } else if(e.keyCode === 8 || e.keycode === 46) {
+      // Deletion
+      deletionOccurred.current = true
+    } else if(e.keyCode >= 97 && e.keyCode <= 105) {
+      // Control Numpad: Kanji selection
+      selectKanji(e.keyCode - 97)
+    } else if(e.keyCode >= 49 && e.keyCode <= 57) {
+      // Control Number: Kanji selection
+      selectKanji(e.keyCode - 49)
     }
   }
 
   const kanjiModeValidation = (e) => {
     // Capture cursor location
-    var cursorLocation = textArea.current.selectionStart
+    var curr = textArea.current.selectionStart
+
     if (e.keyCode && e.keyCode === 8)
-      cursorLocation--
+      curr--
 
     // Check if we traveled behind kanji mode start
-    if (kanjiMode === 'on' && cursorLocation <= (kanjiLocation.current - 1))
+    if (kanjiMode === 'on' && curr <= (kanjiLocation.current - 1))
       setKanjiMode('off')
   }
 
   const selectKanji = (index) => {
+    // Validate index
+    if(kanijSuggestions.length === 0 || kanijSuggestions.length < index)
+      return
+
+    // Save selection
+    let kanjiValue = "" 
+    let hiraganaValue = kanjiInput.current
+    
+    wanakana.tokenize(kanijSuggestions[index], { detailed: true }).forEach( x => {
+      if(x.type === "kanji")
+        kanjiValue += x.value
+      else if(x.type === "hiragana")
+        hiraganaValue = hiraganaValue.replace(x.value, "")
+    })
+    
+    kanjiList.push({kanji: kanjiValue, hiragana: hiraganaValue, romaji: wanakana.toRomaji(hiraganaValue)})
+    setKanjiList(kanjiList)
+    
     // Update input
     var newInput = inputValue.substring(0, kanjiLocation.current)
     newInput += kanijSuggestions[index]
+    newInput += inputValue.substring(kanjiLocation.current + kanjiInput.current.length)
 
     setInputValue(newInput)
 
     // Clean up
     kanjiLocation.current = -1
+    kanjiInput.current = ""
     setKanjiMode('off')
     setKanjiSuggestions([])
   }
+
+  const blurCleanup = () => {
+    console.log("SETTING CURSOR IN TIMEOUT TO: " + -1)
+    cursorLocation.current = -1
+    translationStart.current = -1
+  }
+
+  const clickCleanup = (e) => {
+    console.log("SETTING CURSOR IN CLICK TO: " + -1)
+    cursorLocation.current = -1
+    translationStart.current = -1
+
+    kanjiModeValidation(e);
+  }
+
 
   // Render
   return (
@@ -164,7 +215,8 @@ const JapaneseInput = props => {
         value={inputValue}
         onChange={e => setInputValue(e.target.value)}
         onKeyDown={e => parseKeyPress(e)}
-        onClick={e => kanjiModeValidation(e)} />
+        onClick={e => clickCleanup(e)}
+        onBlur={() => blurCleanup()}/>
       <div style={{ display: 'inline-block' }}>
         <StatusLight status={kanjiMode} label="漢字" japanese={true} />
         <PillSelector selections={kanijSuggestions} isJapanese={true} onClick={i => selectKanji(i)} />

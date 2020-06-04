@@ -23,7 +23,7 @@ const createWindow = () => {
 
   // UPDATE FOR YOUR ENVIRONMENT: REACT DEV TOOLS
   BrowserWindow.addDevToolsExtension(
-    path.join(os.homedir(), 'AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.6.0_0')
+    path.join(os.homedir(), 'AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.7.0_2')
   )
   BrowserWindow.addDevToolsExtension(
     path.join(os.homedir(), 'AppData/Local/Google/Chrome/User Data/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.17.0_0')
