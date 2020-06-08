@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 //import PropTypes from 'prop-types'
+import { Button } from '../atoms'
 
 
 const ScreenCaptureStyle = styled.div`
@@ -10,7 +11,14 @@ const ScreenCaptureStyle = styled.div`
   .view {
     background: black;
     margin: 15px;
-    padding-bottom: calc(100% - 30px);
+    position: relative;
+    height: calc(100% - 30px);
+  }
+  
+  .setBoundsButton {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
   }
 `
 
@@ -21,9 +29,11 @@ const ScreenCapture = () => {
 
   // Render
   return (
-    <ScreenCaptureStyle>
+    <ScreenCaptureStyle className="flex-grow-1">
       <div className="view">
-
+        <Button className="setBoundsButton">
+          Set Bounds
+        </Button>
       </div>
     </ScreenCaptureStyle>
   )
