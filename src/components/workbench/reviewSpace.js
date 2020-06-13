@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Column } from '../layouts'
 import { ScreenCapture } from '../molecules'
-import { Title } from '../atoms'
+import { Title, Switch } from '../atoms'
 
 // Component
 const ReviewSpace = props => {
@@ -22,6 +22,7 @@ const ReviewSpace = props => {
         <Title>
           Control Panel
         </Title>
+        <Switch label="Romaji" />
       </div>
     </Column>
   )

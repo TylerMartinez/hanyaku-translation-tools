@@ -4,6 +4,7 @@ import Title from './title'
 import TextArea from './textarea'
 import StatusLight from './statusLight'
 import Pill from './pill'
+import Switch from './switch'
 
 
 export {
@@ -12,5 +13,6 @@ export {
   Title,
   TextArea,
   StatusLight,
-  Pill
+  Pill,
+  Switch
 }

@@ -63,8 +63,8 @@ export const takeScreenshot = async (bounds, crop, callback) => {
   let screenSelected = remote.screen.getDisplayNearestPoint({x: bounds.x, y: bounds.y})
 
   // Adjust crop for multiple displays and scale factor
-  crop.distanceX = Math.floor((Math.abs(screenSelected.bounds.x - crop.distanceX) + 2) * screenSelected.scaleFactor)
-  crop.distanceY = Math.floor((Math.abs(screenSelected.bounds.y - crop.distanceY) + 26) * screenSelected.scaleFactor)
+  crop.distanceX = Math.round((Math.abs(screenSelected.bounds.x - crop.distanceX) + 2) * screenSelected.scaleFactor)
+  crop.distanceY = Math.round((Math.abs(screenSelected.bounds.y - crop.distanceY) + 26) * screenSelected.scaleFactor)
 
   // Get Sources
   let sources = await desktopCapturer.getSources({ types: ['window', 'screen'] })

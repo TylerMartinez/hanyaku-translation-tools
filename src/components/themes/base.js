@@ -17,6 +17,11 @@ const Base = {
   lightOff: '#bd3922',
   lightLabel: '#A1B2BC',
 
+  switchSocket: '#3C3F44',
+  switchOn: '#02691d',
+  switchOff: '#bd3922',
+  switchLabel: '#A1B2BC',
+
   pill: '#bd3922',
   pillHover: '#b5311a',
   pillText: '#dddddd',
