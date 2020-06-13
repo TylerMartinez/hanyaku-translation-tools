@@ -1,28 +1,31 @@
 import styled from 'styled-components'
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 //Styles
 const SwitchSocket = styled.div`
   background: ${props => props.theme.switchSocket};
-  border-radius: 5px;
-  height: 10px;
-  width: 25px;
+  border-radius: 10px;
+  height: 15px;
+  width: 35px;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
 `
 
 const SwitchRocker = styled.div`
-  background-color: ${props => {
-    switch (props.status) {
-      case 'on':
-        return props.theme.switchOn
-
-      default:
-        return props.theme.switchOff
+   ${props => {
+    if(props.status) {
+      return "background-color:" + props.theme.switchOn 
+    } else {
+      return "background-color:" + props.theme.switchOff
     }
   }};
-  border-radius: 10px;
-  height: 10px;
-  width: 10px;
+  border-radius: 25px;
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+  position: absolute;
 `
 
 const SwitchLabel = styled.div`
@@ -32,22 +35,27 @@ const SwitchLabel = styled.div`
   user-select: none;
   display: inline-block;
   font-weight: bold;
+  margin-left: 10px;
+  vertical-align: middle;
 `
 
 const SwitchStyle = styled.div`
   display: inline-block;
-  height:30px;
   margin-right:10px;
 `
 
 // Component
 const Switch = props => {
 
+  // State Hooks 
+  let [status, setStatus] = useState(props.initStatus)
+  let [rockerClass, setRockerClass] = useState(props.initStatus ? "slide-right" : "slide-left")
+
   //Render
   return (
     <SwitchStyle>
       <SwitchSocket>
-        <SwitchRocker status={false} />
+        <SwitchRocker className={rockerClass} status={status} onClick={() => {setStatus(!status); !status ? setRockerClass("slide-right") : setRockerClass("slide-left");}} />
       </SwitchSocket>
       <SwitchLabel>
         {props.label}
@@ -59,6 +67,7 @@ const Switch = props => {
 // PropTypes
 Switch.propTypes = {
   property: PropTypes.string,
+  initStatus: PropTypes.bool,
   label: PropTypes.string,
   japanese: PropTypes.bool
 }

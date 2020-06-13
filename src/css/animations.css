@@ -35,3 +35,31 @@
   75% { opacity: 0;}
   100% { opacity: 1; }
 }
+
+.slide-right {
+  animation: slideright ease-in 0.25s forwards;
+}
+
+@keyframes slideright {
+  from {
+    left: 0% 
+  }
+
+  to {
+    left: calc(100% - 15px)
+  }
+}
+
+.slide-left {
+  animation: slideleft ease-in 0.25s forwards;
+}
+
+@keyframes slideleft {
+  from {
+    left: calc(100% - 15px)
+  }
+
+  to {
+    left: 0%
+  }
+}

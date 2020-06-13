@@ -22,7 +22,8 @@ const ReviewSpace = props => {
         <Title>
           Control Panel
         </Title>
-        <Switch label="Romaji" />
+        <Switch label="Romaji" initStatus={false}/>
+        <Switch label="Romaji" initStatus={true}/>
       </div>
     </Column>
   )
