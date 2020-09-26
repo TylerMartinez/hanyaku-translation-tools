@@ -1,6 +1,7 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
 const os = require('os')
+const glob = require('glob')
 
 require('electron-reload')('./dist/**/*')
 
@@ -22,12 +23,17 @@ const createWindow = () => {
   })
 
   // UPDATE FOR YOUR ENVIRONMENT: REACT DEV TOOLS
-  BrowserWindow.addDevToolsExtension(
-    path.join(os.homedir(), 'AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.7.0_4')
-  )
-  BrowserWindow.addDevToolsExtension(
-    path.join(os.homedir(), 'AppData/Local/Google/Chrome/User Data/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.17.0_0')
-  )
+  glob(path.join(os.homedir(), 'AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/')+"*", {}, function(er, files){
+    BrowserWindow.addDevToolsExtension(
+        files[0]
+      )
+  })
+  glob(path.join(os.homedir(), 'AppData/Local/Google/Chrome/User Data/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/')+"*", {}, function(er, files){
+    BrowserWindow.addDevToolsExtension(
+        files[0]
+      )
+  })
+
 
   // and load the index.html of the app.
   win.loadFile('./index.html')
