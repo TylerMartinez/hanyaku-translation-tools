@@ -27,7 +27,7 @@ const config = (state = initialState, action) => {
         error: null,
         data: {
           ...state.data,
-          recentProjects: [...action.payload]
+          [action.payload.property]: action.payload.content
         }
       }
     }

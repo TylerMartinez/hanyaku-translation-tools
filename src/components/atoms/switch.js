@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 //Styles
@@ -46,16 +46,11 @@ const SwitchStyle = styled.div`
 
 // Component
 const Switch = props => {
-
-  // State Hooks 
-  let [status, setStatus] = useState(props.initStatus)
-  let [rockerClass, setRockerClass] = useState(props.initStatus ? "slide-right" : "slide-left")
-
   //Render
   return (
     <SwitchStyle>
       <SwitchSocket>
-        <SwitchRocker className={rockerClass} status={status} onClick={() => {setStatus(!status); !status ? setRockerClass("slide-right") : setRockerClass("slide-left");}} />
+        <SwitchRocker className={props.status ? "slide-right" : "slide-left"} status={props.status} onClick={() => {props.click(!props.status)}} />
       </SwitchSocket>
       <SwitchLabel>
         {props.label}
@@ -67,9 +62,10 @@ const Switch = props => {
 // PropTypes
 Switch.propTypes = {
   property: PropTypes.string,
-  initStatus: PropTypes.bool,
+  status: PropTypes.bool,
   label: PropTypes.string,
-  japanese: PropTypes.bool
+  japanese: PropTypes.bool,
+  click: PropTypes.func
 }
 
 export default Switch

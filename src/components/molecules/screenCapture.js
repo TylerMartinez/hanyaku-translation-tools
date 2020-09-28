@@ -4,10 +4,11 @@ import styled from 'styled-components'
 import { Button } from '../atoms'
 import { remote } from 'electron'
 import { takeScreenshot } from '../../utils/capturingUtils'
-
+import { useSelector, useDispatch } from 'react-redux'
+import {UPDATE_WORKSPACE_SETTINGS, UPDATE_TRANSLATION} from '../../redux/actionTypes'
 
 const ScreenCaptureStyle = styled.div`
-  max-height: 700px;
+  height: 45%;
   overflow: hidden;
 
   .view {
@@ -24,6 +25,11 @@ const ScreenCaptureStyle = styled.div`
   }
   
   .setBoundsButton {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+  }
+  .captureButton {
     position: absolute;
     bottom: 5px;
     right: 5px;
@@ -48,26 +54,48 @@ const ScreenCapture = () => {
 
   // State Hooks
   var [boundsWindowOpen, setBoundsWindowOpen]  = useState(false)
-  var [screenShot, setScreenShot]  = useState(null)
+
+  // Selectors
+  const workbenchSettings = useSelector(state => state.project.data.workspace)
+  const translation = useSelector(state => state.project.data.translations[workbenchSettings.currentIndex])
+
+  // Actions
+  const dispatch = useDispatch()
+  const updateSettings = () => {
+    dispatch({ type: UPDATE_WORKSPACE_SETTINGS, payload: workbenchSettings})
+  }
+  const updateTranslation = () => {
+    dispatch({ type: UPDATE_TRANSLATION, payload: translation})
+  }
+
 
   // Functions
+  const setImage = img => {
+    translation.image = img
+    updateTranslation(translation)
+  }
+
   const toggleBoundsWindow = async () => {
     if(boundsWindow.current){
       // Get window
       let window = await boundsWindow.current.webContents.executeJavaScript('window')
-
+      
       // Get Crop
-      let crop = {
+      workbenchSettings.crop = {
         height: window.innerHeight - 27,
         width: window.innerWidth - 4,
         distanceX: window.screenLeft ,
-        distanceY: window.screenTop - 1
+        distanceY: window.screenTop - 1,
+        x_bound: boundsWindow.current.getBounds().x,
+        y_bound: boundsWindow.current.getBounds().y,
       }
 
-      await takeScreenshot(boundsWindow.current.getBounds(), crop, (img) => {setScreenShot(img)})
+      updateSettings()
+
+      await takeScreenshot(workbenchSettings.crop, setImage, true)
 
       boundsWindow.current.close()
-      boundsWindow.current = null;
+      boundsWindow.current = null
       setBoundsWindowOpen(false)
     } else {
       // Create window
@@ -92,16 +120,25 @@ const ScreenCapture = () => {
     }
   }
 
+  const capture = async () => {
+    await takeScreenshot(workbenchSettings.crop, setImage)
+  }
+
   // Render
   return (
     <ScreenCaptureStyle className="flex-grow-1">
       <div className="view">
-        {screenShot &&
-          <div className="viewInner"><span className="imageHelper"></span><img className="image" src={screenShot}></img></div>
+        {translation.image &&
+          <div className="viewInner"><span className="imageHelper"></span><img className="image" src={translation.image}></img></div>
         }
         <Button className="setBoundsButton" onClick={() => toggleBoundsWindow()}>
           {boundsWindowOpen ? "Capture Bounds" : "Set Bounds"}
         </Button>
+        {workbenchSettings.crop &&
+          <Button className="captureButton" onClick={() => capture()}>
+            Capture
+          </Button>
+        }
       </div>
     </ScreenCaptureStyle>
   )

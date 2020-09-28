@@ -37,6 +37,9 @@ const Base = {
   titlebutton_hover: '#bd3922',
   logo: '#bd3922',
 
+  imageButton: '#DDDDDD',
+  imageButton_hover: 'white',
+
   scrollbar_thumb: '#666666',
   scrollbar_track: '#282B2F'
 }

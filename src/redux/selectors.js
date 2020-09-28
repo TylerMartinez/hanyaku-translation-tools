@@ -11,3 +11,7 @@ export const getRecentProjects = (state) => {
 export const getConfig = (state) => {
   return state.config.data;
 }
+
+export const getProject = (state) => {
+  return state.project.data;
+}

@@ -33,7 +33,7 @@ function* updateConfigAction(action) {
     yield updateConfig(config, action.payload.content, action.payload.property)
 
     // Success! Update State
-    yield put({ type: UPDATE_CONFIG_SUCCESS, payload: action.payload.content })
+    yield put({ type: UPDATE_CONFIG_SUCCESS, payload: action.payload })
   } catch (e) {
     // Failure. Share error.
     yield put({ type: UPDATE_CONFIG_FAIL, payload: e })

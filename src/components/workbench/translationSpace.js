@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Column, ResizableSection } from '../layouts'
-import { TextArea, Title } from '../atoms'
+import { Column, Row, RelativeSection } from '../layouts'
+import { useSelector } from 'react-redux'
+import { TextArea, Title, ImageButton } from '../atoms'
 import { JapaneseInput } from '../molecules'
+import RightArrow from '../../images/right-arrow'
+import Camera from '../../images/camera'
 
 // Component
 const TranslationSpace = props => {
@@ -11,6 +14,9 @@ const TranslationSpace = props => {
 
   // Functions
 
+  // Selectors
+  const workbenchSettings = useSelector(state => state.project.data.workspace)
+
   // Actions
 
   // Variables
@@ -18,24 +24,37 @@ const TranslationSpace = props => {
   // Render
   return (
     <Column col={props.col} flex={true}>
-      <ResizableSection>
+      <Row padding={true}>
         <Title>
           Original
         </Title>
+      </Row>
+      <Row fill={true} padding={true}>
         <JapaneseInput onRomajiUpdate={(romaji) => setRomajiValue(romaji)} />
-      </ResizableSection>
-      <ResizableSection>
-        <Title>
-          Romaji
-        </Title>
-        <TextArea className="flex-grow-1" value={romajiValue} onChange={(e) => setRomajiValue(e.target.value)} />
-      </ResizableSection>
-      <ResizableSection>
+      </Row>
+      { workbenchSettings.romaji && 
+        <Row padding={true}>
+          <Title>
+            Romaji
+          </Title>
+        </Row>}
+      { workbenchSettings.romaji &&
+        <Row fill={true} padding={true}>  
+          <TextArea className="flex-grow-1" value={romajiValue} onChange={(e) => setRomajiValue(e.target.value)} />
+      </Row>}
+      <Row padding={true}>
         <Title>
           Translation
         </Title>
+      </Row>
+      <Row fill={true} padding={true}>  
         <TextArea className="flex-grow-1" />
-      </ResizableSection>
+      </Row>
+      <RelativeSection>
+        <ImageButton flip={true} image={RightArrow} position={"absolute"} left={"0px"}/>
+        <ImageButton image={Camera} position={"absolute"} size={"20px"} left={"calc(50% - 10px)"}/>
+        <ImageButton image={RightArrow} position={"absolute"} right={"0px"}/>
+      </RelativeSection>
     </Column>
   )
 }

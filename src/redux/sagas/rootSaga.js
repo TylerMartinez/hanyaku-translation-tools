@@ -1,12 +1,15 @@
 import { all } from 'redux-saga/effects'
 import { updateConfigSaga, updateRecentProjectsSaga } from './configSagas'
-import { loadProjectSaga, createProjectSaga } from './projectSagas'
+import { loadProjectSaga, createProjectSaga, updateWorkspaceSettingSaga, updateProjectSaga, updateTranslationSaga } from './projectSagas'
 
 export default function* rootSaga() {
   yield all([
     updateConfigSaga(),
     updateRecentProjectsSaga(),
     createProjectSaga(),
-    loadProjectSaga()
+    loadProjectSaga(),
+    updateProjectSaga(),
+    updateWorkspaceSettingSaga(),
+    updateTranslationSaga()
   ])
 }

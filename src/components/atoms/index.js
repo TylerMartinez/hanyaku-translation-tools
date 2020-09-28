@@ -5,6 +5,7 @@ import TextArea from './textarea'
 import StatusLight from './statusLight'
 import Pill from './pill'
 import Switch from './switch'
+import ImageButton from './imageButton'
 
 
 export {
@@ -14,5 +15,6 @@ export {
   TextArea,
   StatusLight,
   Pill,
-  Switch
+  Switch,
+  ImageButton
 }
