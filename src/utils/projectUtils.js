@@ -13,14 +13,18 @@ const initialState = () => {return {
       currentIndex: 0
     },
     translations:[
-      {
-        image: null,
-        original: "",
-        romaji: "",
-        translation: "",
-        tags:[]
-      }
+      getNewTranslation()
     ]
+  }
+}
+
+export function getNewTranslation() {
+  return {
+    image: null,
+    original: "",
+    romaji: "",
+    translation: "",
+    tags:[]
   }
 }
 

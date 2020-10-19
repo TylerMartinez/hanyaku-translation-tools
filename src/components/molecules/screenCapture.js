@@ -128,7 +128,7 @@ const ScreenCapture = () => {
   return (
     <ScreenCaptureStyle className="flex-grow-1">
       <div className="view">
-        {translation.image &&
+        {translation && translation.image &&
           <div className="viewInner"><span className="imageHelper"></span><img className="image" src={translation.image}></img></div>
         }
         <Button className="setBoundsButton" onClick={() => toggleBoundsWindow()}>

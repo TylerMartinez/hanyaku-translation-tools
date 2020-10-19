@@ -9,11 +9,12 @@ const ImageButtonStyle = styled.button`
   width: "15px";
   padding: 0px;
   color: ${props => props.theme.imageButton};
-  cursor: pointer;
+  cursor: ${props => !props.disabled ? "pointer": ""};
   outline: none;
   position: ${props => props.position};
   left: ${props => props.left};
   right: ${props => props.right};
+  top: ${props => props.top};
   transform: ${props => props.flip ? "rotate(180deg)" : ""};
 
   .image {
@@ -21,9 +22,8 @@ const ImageButtonStyle = styled.button`
     width: ${props => props.size ? props.size: "15px"};
   }
 
-  &:disabled {
-    background: ${props => props.theme.disabled};
-    color: ${props => props.theme.disabledText};
+  &:disabled svg path{
+    fill: ${props => props.theme.imageButton_disabled} !important;
   }
 
   & svg path{
@@ -31,7 +31,7 @@ const ImageButtonStyle = styled.button`
   }
 
   &:hover svg path {
-    fill: ${props => props.theme.imageButton_hover} !important;
+    fill: ${props => !props.disabled ? props.theme.imageButton_hover: ""} !important;
   }
 `
 
@@ -39,7 +39,14 @@ const ImageButtonStyle = styled.button`
 const ImageButton = props => {
   //Render
   return (
-    <ImageButtonStyle flip={props.flip} position={props.position} left={props.left} right={props.right} size={props.size}>
+    <ImageButtonStyle flip={props.flip} 
+                      position={props.position} 
+                      left={props.left} 
+                      right={props.right} 
+                      top={props.top} 
+                      size={props.size} 
+                      disabled={props.disabled}
+                      onClick={props.onClick}>
       <div className="image" dangerouslySetInnerHTML={{__html: props.image}}></div>
     </ImageButtonStyle>
   )
@@ -52,7 +59,10 @@ ImageButton.propTypes = {
   position: PropTypes.string,
   left: PropTypes.string,
   right: PropTypes.string,
-  size: PropTypes.string
+  size: PropTypes.string,
+  disabled: PropTypes.bool,
+  top: PropTypes.string,
+  onClick: PropTypes.func
 }
 
 export default ImageButton

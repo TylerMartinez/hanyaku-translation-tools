@@ -11,7 +11,8 @@ import {
   UPDATE_PROJECT_SUCCESS,
   UPDATE_PROJECT_FAIL,
   UPDATE_WORKSPACE_SETTINGS,
-  UPDATE_TRANSLATION
+  UPDATE_TRANSLATION,
+  CREATE_TRANSLATION
 } from '../actionTypes'
 
 import { saveProject, loadProject, updateProject } from '../../utils/projectUtils'
@@ -44,16 +45,13 @@ function* updateWorkspaceSettingsAction(action) {
   yield put({ type: UPDATE_PROJECT_REQUEST, payload: { property: 'workspace', content: action.payload }})
 }
 
+function * createTranslationAction(action) {
+  yield put({ type: UPDATE_PROJECT_REQUEST, payload: { property: 'createTranslation', index: action.payload.index, content: action.payload.translation }})
+}
+
 function* updateTranslationAction(action) {
-  // Get project
-  var project = yield select(getProject)
-
-  // update current translation
-  var translations = project.translations
-  translations[project.workspace.currentIndex] = action.payload
-
   // Update project
-  yield put({ type: UPDATE_PROJECT_REQUEST, payload: { property: 'translations', content: translations }})
+  yield put({ type: UPDATE_PROJECT_REQUEST, payload: { property: 'translations', index: action.payload.index, content: action.payload.translation }})
 }
 
 function* updateProjectAction(action) {
@@ -62,11 +60,13 @@ function* updateProjectAction(action) {
     // Get project
     var project = yield select(getProject)
 
+    //UPDATE IT!!!
+
     // Save to disk
     yield updateProject(project)
 
     // Success! Update State
-    yield put({ type: UPDATE_PROJECT_SUCCESS, payload: action.payload.content })
+    yield put({ type: UPDATE_PROJECT_SUCCESS, payload: action.payload })
   } catch (e) {
     // Failure. Share error.
     yield put({ type: UPDATE_PROJECT_FAIL, payload: e.message })
@@ -108,6 +108,10 @@ export function* updateWorkspaceSettingSaga() {
 
 export function* updateTranslationSaga() {
   yield takeEvery(UPDATE_TRANSLATION, updateTranslationAction)
+}
+
+export function* createTranslationSaga() {
+  yield takeEvery(CREATE_TRANSLATION, createTranslationAction)
 }
 
 export function* updateProjectSaga() {

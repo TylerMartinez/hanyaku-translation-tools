@@ -39,6 +39,7 @@ const Base = {
 
   imageButton: '#DDDDDD',
   imageButton_hover: 'white',
+  imageButton_disabled: '#666666',
 
   scrollbar_thumb: '#666666',
   scrollbar_track: '#282B2F'

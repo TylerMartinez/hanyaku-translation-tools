@@ -4,6 +4,7 @@ import { TextArea, StatusLight } from '../atoms'
 import { PillSelector } from '../molecules'
 import * as wanakana from 'wanakana'
 import * as AutoKanji from 'autokanji'
+import { useDebounce } from '../../utils/hooks'
 
 const JapaneseInput = props => {
   // State Hooks
@@ -20,6 +21,9 @@ const JapaneseInput = props => {
   var applyingTranslation = useRef(false)
   var kanjiLocation = useRef(-1)
   var kanjiInput = useRef("")
+
+  // Debounce Hooks
+  var savedInput = useDebounce(inputValue, 500)
 
   // Effect Hooks
   useEffect(() => {
@@ -82,6 +86,18 @@ const JapaneseInput = props => {
     // Cleanup the timer 
     return () => clearTimeout(timer)
   }, [inputValue])
+
+  useEffect(() => {
+    if(props.onSave){
+      props.onSave(savedInput)
+    }
+  }, [savedInput])
+
+  useEffect(() => {
+    if(props.initialValue || (props.initialValue == "")) {
+      setInputValue(props.initialValue)
+    }
+  }, [props.initialValue])
 
   // Functions
   const putCursor = () => {
@@ -230,7 +246,9 @@ const JapaneseInput = props => {
 // Proptypes
 JapaneseInput.propTypes = {
   rows: PropTypes.string,
-  onRomajiUpdate: PropTypes.func
+  onRomajiUpdate: PropTypes.func,
+  onSave: PropTypes.func,
+  initialValue: PropTypes.string
 }
 
 export default JapaneseInput
